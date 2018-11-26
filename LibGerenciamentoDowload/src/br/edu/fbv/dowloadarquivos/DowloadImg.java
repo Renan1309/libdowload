@@ -13,19 +13,22 @@ public class DowloadImg implements Runnable {
 
 	String urlDowload;
 	String name;
+	String caminho ;
 	
-	public DowloadImg(String url , String name) {
+	public DowloadImg(String url , String name , String caminho) {
 		this.urlDowload = url;
 		this.name = name;
-		
+		this.caminho = caminho;
 	}
 	
 	@Override
 	public void run() {
-		
+		//"C:\\Users\\renan\\"+name+".jpg";
 		
 		// TODO Auto-generated method stuz
-		String f= "C:\\Users\\renan\\"+name+".jpg";
+		String f= caminho;
+		
+		
 		URL url;
 		try {
 			url = new URL(urlDowload);
