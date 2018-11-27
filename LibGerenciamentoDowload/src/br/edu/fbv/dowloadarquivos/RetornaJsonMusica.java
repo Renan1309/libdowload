@@ -15,25 +15,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import br.edu.fbv.model.Musica;
 import br.edu.fbv.model.Video;
 
-public class RetornaJson implements Callable<List> {
+public class RetornaJsonMusica implements Callable<List> {
 	String urlrecebido;
 
-	public RetornaJson(String urljson) {
+	public RetornaJsonMusica(String urljson) {
 
 		this.urlrecebido = urljson;
 	}
 
 	@Override
-	public List<Video> call() throws Exception {
+	public List<Musica> call() throws Exception {
 		// TODO Auto-generated method stub
 		InputStream inputStream = null;
 
 		InputStreamReader inputStreamReader = null;
 		StringBuffer resultMongo = null;
-		// StringBuffer finalapi = null ;
-
+	
 		URL url = new URL(urlrecebido);
 
 		HttpURLConnection result = (HttpURLConnection) url.openConnection();
@@ -50,7 +50,9 @@ public class RetornaJson implements Callable<List> {
 			resultMongo.append(linha);
 		}
 
-		List<Video> listvideos = new ArrayList<Video>();
+		//List<Video> listvideos = new ArrayList<Video>();
+		
+		List<Musica> listmusica = new ArrayList<Musica>();
 
 		String jsonfinal = resultMongo.toString();
 
@@ -59,22 +61,24 @@ public class RetornaJson implements Callable<List> {
 			JSONObject parentObject = jsonArray.getJSONObject(0);
 			for (int j = 0; j < jsonArray.length(); j++) {
 
-				Video video = new Video();
+				//Video video = new Video();
+				Musica musica = new Musica();
+				
 				JSONObject finalObject = jsonArray.getJSONObject(j);
 
-				video.setId(finalObject.getString("_id"));
-				video.setNome(finalObject.getString("nome"));
-				video.setUrlimagem(finalObject.getString("urlimagem"));
-				video.setUrlvideo(finalObject.getString("urlmusica"));
+				musica.setId(finalObject.getString("_id"));
+				musica.setNome(finalObject.getString("nome"));
+				musica.setUrlimagem(finalObject.getString("urlimagem"));
+				musica.setUrlmusica(finalObject.getString("urlmusica"));
 
-				listvideos.add(video);
+				listmusica.add(musica);
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return listvideos;
+		return listmusica;
 
 	}
 

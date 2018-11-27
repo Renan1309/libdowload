@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 import br.edu.fbv.model.Video;
 
-public class RetornaJsonMusica {
+public class RetornaJsonVideo {
 
 		
 		 String urlrecebido;
@@ -52,7 +52,7 @@ public class RetornaJsonMusica {
 		              resultMongo.append(linha);
 		          }
 
-		          	List<Video> listaMusica= new ArrayList<Video>();
+		          	List<Video> listavideo= new ArrayList<Video>();
 		          	
 		          	String jsonfinal = resultMongo.toString();
 		          
@@ -68,9 +68,9 @@ public class RetornaJsonMusica {
 			                video.setId(finalObject.getString("_id"));
 			                video.setNome(finalObject.getString("nome"));
 			                video.setUrlimagem(finalObject.getString("urlimagem"));
-			                video.setUrlvideo(finalObject.getString("urlmusica"));
+			                video.setUrlvideo(finalObject.getString("urlvideo"));
 			              
-			                listaMusica.add(video);
+			                listavideo.add(video);
 			            }
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -78,7 +78,7 @@ public class RetornaJsonMusica {
 				}
 
 		          
-		       return listaMusica ;
+		       return listavideo ;
 			
 		
 		

@@ -10,16 +10,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import br.edu.fbv.dowloadarquivos.DowloadImg;
-import br.edu.fbv.dowloadarquivos.RetornaJson;
+import br.edu.fbv.dowloadarquivos.DowloadMusica;
+import br.edu.fbv.dowloadarquivos.DowloadVideo;
+import br.edu.fbv.dowloadarquivos.RetornaJsonMusica;
 import br.edu.fbv.model.Video;
 
 public class libdowload {
+	
+	 ExecutorService ex = Executors.newCachedThreadPool();
 	
 	public List dowloadjson () throws IOException, InterruptedException, ExecutionException {
 		 ExecutorService execx = Executors.newCachedThreadPool();
 		
 		String url = "https://libprogavancada.herokuapp.com/musica";
-		RetornaJson retjson = new RetornaJson(url);
+		RetornaJsonMusica retjson = new RetornaJsonMusica(url);
 	
 		
 		 Future<List> submit =  execx.submit(retjson);
@@ -30,17 +34,37 @@ public class libdowload {
 		return future.get() ;
 	}
 	
+	public void dowloadVideo(String url , String name , String caminho ) {
+		
+		DowloadVideo dowloadvideo = new DowloadVideo(url, name, caminho);
+		 System.out.println("execultando thread Vídeo");
+		
+		ex.execute(dowloadvideo);
+		
+		
+	}
 	
+	public void dowloadMusica (String url , String name , String caminho ){
+		// TODO Auto-generated method stub
+		
+		DowloadMusica dowloadMusica = new DowloadMusica(url, name, caminho);
+		
+		 System.out.println("execultando thread Musica");
+		ex.execute(dowloadMusica);
+
+	}
 	
- 	public String dowloadImg (String url , String name  ) throws IOException {
+ 	public String dowloadImg (String url , String name , String caminho   ) throws IOException {
  		
  		
- 		String caminho = "C:\\Users\\renan\\"+name+".jpg";
+ 		//String caminho = "C:\\Users\\renan\\"+name+".jpg";
  		
 		
 		DowloadImg obj = new DowloadImg(url , name, caminho);
+		 System.out.println("execultando thread Imagem");
+		ex.execute(obj);
 		
-		poolthread(obj);
+		//poolthread(obj);
 		
 		String mensagem = null ;
 		

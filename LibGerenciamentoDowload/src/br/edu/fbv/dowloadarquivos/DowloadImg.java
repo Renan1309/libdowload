@@ -26,7 +26,7 @@ public class DowloadImg implements Runnable {
 		//"C:\\Users\\renan\\"+name+".jpg";
 		
 		// TODO Auto-generated method stuz
-		String f= caminho;
+		String f= caminho+""+name+".jpg";;
 		
 		
 		URL url;
