@@ -10,58 +10,25 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import br.edu.fbv.templatemethod.DowloadTemplate;
 
-public class DowloadVideo implements Runnable {
+
+public class DowloadVideo extends DowloadComObservable {
 	
-	String urlDowload;
-	String name;
-	String caminho ;
+	public DowloadVideo(String url, String name, String caminho) {
+		super(url, name, caminho);
+		// TODO Auto-generated constructor stub
+	}
+
 	
-	public DowloadVideo(String url , String name , String caminho) {
-		this.urlDowload = url;
-		this.name = name;
-		this.caminho = caminho;
+
+	@Override
+	public String caminhoExtensao(String caminho, String name) {
+		// TODO Auto-generated method stub
+		String f= caminho+""+name+".mp4";
+		return  f;
 	}
 	
 	
-	
-	
-	@Override
-	public void run() {
-		
-	
-		String f= caminho+""+name+".mp4";
-		
-		URL url;
-		try {
-			url = new URL(urlDowload);
-			//HttpURLConnection http = (HttpURLConnection)url.openConnection();
-			//double fileSize = (double) http.getContentLengthLong();
-			InputStream in = url.openStream();
-			FileOutputStream fos = new FileOutputStream(f);
-			int bytes = 0;
-			
-
-			while ((bytes = in.read()) != -1) {
-				fos.write(bytes);
-			}
-
-			
-			in.close();
-			fos.close();
-			//System.out.println("Download complete video ");
-			
-			//String msg = "baixou ";
-		
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-	
-}
 
 }

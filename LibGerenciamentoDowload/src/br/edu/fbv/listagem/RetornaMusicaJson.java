@@ -1,4 +1,4 @@
-package br.edu.fbv.dowloadarquivos;
+package br.edu.fbv.listagem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,32 +9,36 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.edu.fbv.model.Musica;
-import br.edu.fbv.model.Video;
+import br.edu.fbv.templatemethod.RetornaJsonTemplate;
+import br.edu.fbvCodAntigo.Midias;
+import br.edu.fbvCodAntigo.ObjectTeste;
 
-public class RetornaJsonMusica implements Callable<List> {
-	String urlrecebido;
-
-	public RetornaJsonMusica(String urljson) {
-
-		this.urlrecebido = urljson;
+public class RetornaMusicaJson extends RetornaJsonTemplate {
+	String urlrecebida  ;
+	public RetornaMusicaJson(String urljson) {
+		super(urljson);
+		
+		this.urlrecebida = urljson;
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public List<Musica> call() throws Exception {
+	public List<Musica> call() throws IOException {
 		// TODO Auto-generated method stub
+		//String urlrecebida = urljson ;
+		
 		InputStream inputStream = null;
 
 		InputStreamReader inputStreamReader = null;
 		StringBuffer resultMongo = null;
 	
-		URL url = new URL(urlrecebido);
+		URL url = new URL(urlrecebida);
 
 		HttpURLConnection result = (HttpURLConnection) url.openConnection();
 
@@ -79,7 +83,6 @@ public class RetornaJsonMusica implements Callable<List> {
 		}
 
 		return listmusica;
-
 	}
 
 }

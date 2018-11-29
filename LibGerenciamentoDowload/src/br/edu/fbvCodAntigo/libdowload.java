@@ -1,4 +1,4 @@
-package br.edu.fbv.libdowload;
+package br.edu.fbvCodAntigo;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +12,6 @@ import java.util.concurrent.Future;
 import br.edu.fbv.dowloadarquivos.DowloadImg;
 import br.edu.fbv.dowloadarquivos.DowloadMusica;
 import br.edu.fbv.dowloadarquivos.DowloadVideo;
-import br.edu.fbv.dowloadarquivos.RetornaJsonMusica;
 import br.edu.fbv.model.Video;
 
 public class libdowload {
@@ -26,7 +25,7 @@ public class libdowload {
 		RetornaJsonMusica retjson = new RetornaJsonMusica(url);
 	
 		
-		 Future<List> submit =  execx.submit(retjson);
+		 Future<List> submit =  ex.submit(retjson);
 		 
 		Future<List> future = submit;
 		
@@ -36,10 +35,12 @@ public class libdowload {
 	
 	public void dowloadVideo(String url , String name , String caminho ) {
 		
-		DowloadVideo dowloadvideo = new DowloadVideo(url, name, caminho);
+		 DowloadVideo dowloadvideo = new DowloadVideo(url, name, caminho);
+		
+		//Dowloadteste teste = new Dowloadteste(url, name, caminho);
 		 System.out.println("execultando thread Vídeo");
 		
-		ex.execute(dowloadvideo);
+		//ex.execute(dowloadvideo);
 		
 		
 	}

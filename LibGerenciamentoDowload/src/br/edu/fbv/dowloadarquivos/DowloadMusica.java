@@ -6,53 +6,23 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DowloadMusica implements Runnable{
-	String urlDowload;
-	String name;
-	String caminho ;
-	
-	public DowloadMusica(String url , String name , String caminho) {
-		this.urlDowload = url;
-		this.name = name;
-		this.caminho = caminho;
+import br.edu.fbv.templatemethod.DowloadTemplate;
+
+public class DowloadMusica extends DowloadComObservable{
+
+	public DowloadMusica(String url, String name, String caminho) {
+		super(url, name, caminho);
+		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
+
 	@Override
-	public void run() {
+	public String caminhoExtensao(String caminho, String name) {
 		
-	
 		String f= caminho+""+name+".mp3";
 		
-		URL url;
-		try {
-			url = new URL(urlDowload);
-			//HttpURLConnection http = (HttpURLConnection)url.openConnection();
-			//double fileSize = (double) http.getContentLengthLong();
-			InputStream in = url.openStream();
-			FileOutputStream fos = new FileOutputStream(f);
-			int bytes = 0;
-			
+		return f;
+	}
 
-			while ((bytes = in.read()) != -1) {
-				fos.write(bytes);
-			}
+	
 
-			
-			in.close();
-			fos.close();
-			
-		
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-	
-}
 }

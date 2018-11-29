@@ -1,4 +1,4 @@
-package br.edu.fbv.dowloadarquivos;
+package br.edu.fbvCodAntigo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,28 +8,36 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.edu.fbv.model.Video;
+import br.edu.fbv.observer.DowloadRealizado;
 
-public class RetornaJsonVideo {
+public class RetornaJsonVideo implements Callable<List>{
 
 		
 		 String urlrecebido;
 
-		public  List<Video> jsonrecebido(String urljson) throws IOException{
+		public  RetornaJsonVideo(String urljson){
 			
 			urlrecebido = urljson ;
 			
-			//String urlrecebido
-
-			 //String urlrecebido = "https://libprogavancada.herokuapp.com/musica";
+			
 			    
 
-		      InputStream inputStream = null;
+		     
+			
+		
+		
+		}
+
+		@Override
+		public List<Video> call() throws Exception {
+			 InputStream inputStream = null;
 
 		      InputStreamReader inputStreamReader = null;
 		      StringBuffer resultMongo = null;
@@ -77,11 +85,11 @@ public class RetornaJsonVideo {
 					e.printStackTrace();
 				}
 
+		          DowloadRealizado dos = new DowloadRealizado();
+		          dos.mudarEstado();
 		          
 		       return listavideo ;
 			
-		
-		
 		}
 
 	}
